@@ -63,6 +63,28 @@ ASP has three layers:
 
 ---
 
+## Envelope Wrapping Profiles
+
+ASP Envelope remains the constitutional mechanism for validation, sealing, and movement of ASP-governed material.
+
+ASP Envelope semantics do **not** change because different wrapping profiles are available.
+
+The repository may support multiple envelope wrapping profiles, including:
+- a default post-quantum wrapping profile through **PQC Vault**
+- a non-PQC compatibility profile when PQC wrapping is unavailable, unnecessary, or out of scope
+
+This means ASP-governed material may be carried as a **Portable Post-Quantum Boundary** product without changing ASP meaning, legitimacy, authority, posture, or handling.
+
+Default PQC wrapping does **not** mean:
+- ASP Envelope is replaced
+- non-PQC ASP Envelope movement is invalidated
+- ASP functionality changes
+- ASP runtime semantics change
+
+It means only that PQC Vault may be used as the preferred wrapper for ASP Envelope movement where available and appropriate.
+
+---
+
 ## Runtime Posture
 
 ASP governs runtime handling posture when actor legitimacy cannot be immediately established.
@@ -88,7 +110,9 @@ It does **not** alter the operational semantics of:
 - Label / Validator
 - OH-01
 
-Existing systems using those operational constructs should remain unaffected by this documentation and structure pass.
+Existing systems using those operational constructs should remain unaffected by this documentation and structure pass unless explicitly changed.
+
+Support for default PQC wrapping and non-PQC compatibility profiles should be read as profile-selection policy for ASP Envelope movement, not as a change to ASP meaning or constitutional authority.
 
 ---
 
