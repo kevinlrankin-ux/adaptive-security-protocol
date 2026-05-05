@@ -1,28 +1,26 @@
 {
   "$schema": "https://json-schema.org/draft/2020-12/schema",
-  "$id": "https://adaptive-security-protocol.local/schemas/pqc-vault-manifest.schema.json",
-  "title": "PQC Vault Manifest Draft",
+  "$id": "https://adaptive-security-protocol.local/schemas/pqc-vault-boundary-manifest.schema.json",
+  "title": "PQC Vault Boundary Manifest Draft",
   "type": "object",
   "additionalProperties": false,
   "required": [
     "profile",
     "version",
-    "envelope_id",
+    "boundary_id",
     "created_at",
-    "payload",
-    "protection",
-    "validation"
+    "wrapping"
   ],
   "properties": {
     "profile": {
       "type": "string",
-      "const": "asp.pqc-vault.envelope"
+      "const": "pqc-vault.portable-post-quantum-boundary"
     },
     "version": {
       "type": "string",
       "pattern": "^0\\.[0-9]+\\.[0-9]+$"
     },
-    "envelope_id": {
+    "boundary_id": {
       "type": "string",
       "minLength": 16
     },
@@ -30,101 +28,19 @@
       "type": "string",
       "format": "date-time"
     },
-    "producer": {
+    "wrapping": {
       "type": "object",
       "additionalProperties": false,
+      "required": ["status"],
       "properties": {
-        "id": { "type": "string" },
-        "key_id": { "type": "string" },
-        "software": { "type": "string" }
-      }
-    },
-    "payload": {
-      "type": "object",
-      "additionalProperties": false,
-      "required": ["content_type", "size", "digest"],
-      "properties": {
-        "content_type": { "type": "string" },
-        "size": { "type": "integer", "minimum": 0 },
-        "digest": {
-          "type": "object",
-          "additionalProperties": false,
-          "required": ["algorithm", "value"],
-          "properties": {
-            "algorithm": { "type": "string" },
-            "value": { "type": "string" }
-          }
-        }
-      }
-    },
-    "protection": {
-      "type": "object",
-      "additionalProperties": false,
-      "required": ["confidentiality", "integrity", "key_wrapping", "signature"],
-      "properties": {
-        "confidentiality": {
-          "type": "object",
-          "additionalProperties": false,
-          "required": ["status"],
-          "properties": {
-            "status": { "enum": ["encrypted", "not-encrypted"] },
-            "algorithm": { "type": "string" }
-          }
+        "status": {
+          "const": "post-quantum-protected"
         },
-        "integrity": {
-          "type": "object",
-          "additionalProperties": false,
-          "required": ["status"],
-          "properties": {
-            "status": { "enum": ["authenticated", "digest-only", "not-provided"] },
-            "algorithm": { "type": "string" }
-          }
+        "algorithm": {
+          "type": "string"
         },
-        "key_wrapping": {
-          "type": "object",
-          "additionalProperties": false,
-          "required": ["status"],
-          "properties": {
-            "status": { "enum": ["pqc", "classical", "none"] },
-            "algorithm": { "type": "string" },
-            "recipient_key_id": { "type": "string" }
-          }
-        },
-        "signature": {
-          "type": "object",
-          "additionalProperties": false,
-          "required": ["status"],
-          "properties": {
-            "status": { "enum": ["pqc", "classical", "none"] },
-            "algorithm": { "type": "string" },
-            "signer_key_id": { "type": "string" }
-          }
-        }
-      }
-    },
-    "validation": {
-      "type": "object",
-      "additionalProperties": false,
-      "required": ["expected_outcomes", "failure_posture"],
-      "properties": {
-        "expected_outcomes": {
-          "type": "array",
-          "items": {
-            "enum": [
-              "valid",
-              "invalid",
-              "unsupported-profile",
-              "unsupported-algorithm",
-              "missing-key",
-              "expired-policy",
-              "ambiguous",
-              "tampered",
-              "malformed"
-            ]
-          }
-        },
-        "failure_posture": {
-          "enum": ["signal", "bounded-friction", "reject", "quarantine"]
+        "recipient_key_id": {
+          "type": "string"
         }
       }
     }
