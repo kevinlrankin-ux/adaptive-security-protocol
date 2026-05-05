@@ -1,60 +1,60 @@
 # PQC Vault
 
-PQC Vault is an ASP-compatible module for wrapping portable artifacts in a post-quantum-capable envelope.
+PQC Vault provides a Portable Post-Quantum Boundary wrapper for ASP-governed material.
 
-It is designed to protect files, backups, configuration bundles, manifests, and other packages as they move through infrastructure that may not itself implement post-quantum cryptography.
+PQC Vault wraps and unwraps ASP-governed material under post-quantum cryptographic protection.
 
 ## Relationship to ASP
 
-ASP remains protocol-first.
+PQC Vault does not define ASP behavior.
 
-PQC Vault does not replace ASP, modify ASP core semantics, or require all ASP systems to implement PQC.
+PQC Vault does not replace ASP.
 
-PQC Vault provides an optional envelope profile that can strengthen validation at artifact boundaries.
+PQC Vault does not compete with ASP or with existing security systems.
+
+PQC Vault does not validate legitimacy, authorize action, assign posture, interpret system meaning, or determine handling.
+
+Access, legitimacy, posture, signaling, escalation, and handling remain outside the scope of PQC Vault.
 
 ## Operating Principle
 
-The artifact can be post-quantum protected even when the surrounding system is not.
+The purpose of PQC Vault is to preserve the Portable Post-Quantum Boundary while protected material moves through systems that have not implemented post-quantum cryptography.
 
-```text
-producer / verifier: PQC-aware
-transport / storage: may be non-PQC
-payload: protected by envelope
-```
+Systems interacting with PQC Vault-wrapped material are not required to implement PQC in order for the boundary to remain preserved.
 
 ## Intended Use Cases
 
 - backup wrapping
-- release package sealing
-- configuration bundle protection
-- portable recovery packages
-- industrial maintenance package verification
-- CI artifact protection
-- long-term archive sealing
-- signed evidence object transport
+- release package wrapping
+- configuration bundle wrapping
+- portable recovery package wrapping
+- industrial maintenance package wrapping
+- CI artifact wrapping
+- long-term archive wrapping
+- signed evidence object wrapping
 
 ## Non-Goals
 
 PQC Vault is not:
 
 - a replacement for ASP
+- a definition of ASP behavior
+- a validation system
+- an authorization system
+- a posture engine
 - a replacement for system authentication
 - a replacement for network transport security
 - a requirement for industrial controllers or constrained devices
 - an offensive security tool
 - a claim of certified cryptographic compliance
 
-## CLI Contract Preview
+## Minimal CLI Contract Preview
 
-The expected CLI shape is:
+The expected minimal CLI shape is:
 
 ```bash
 pqc-vault wrap <input> --recipient <recipient-public-key> --out <artifact.pqcv>
 pqc-vault unwrap <artifact.pqcv> --key <private-key> --out <output>
-pqc-vault inspect <artifact.pqcv>
-pqc-vault verify <artifact.pqcv> --trust <trust-policy>
-pqc-vault sign <input> --key <signing-key> --out <signed-artifact.pqcv>
-pqc-vault rotate <artifact.pqcv> --recipient <new-recipient-public-key> --out <rotated.pqcv>
 ```
 
 This is a contract preview only. It is not yet an implementation.
@@ -63,24 +63,20 @@ This is a contract preview only. It is not yet an implementation.
 
 Before runtime code is added, this module should define:
 
-1. Threat model
-2. Envelope manifest schema
-3. CLI contract
-4. Test vector format
-5. Key-management policy
-6. Algorithm-agility policy
-7. Compatibility matrix
-8. Recovery and break-glass procedure
-9. Validation failure matrix
-10. Implementation review checklist
+1. Wrap/unwrap contract
+2. Minimal boundary manifest schema
+3. Threat model limited to boundary preservation
+4. Key-management policy
+5. Algorithm-agility policy
+6. Compatibility notes
+7. Recovery and break-glass procedure
+8. Implementation review checklist
 
 ## Compatibility Commitment
 
-PQC Vault must preserve ASP compatibility with non-PQC systems.
+PQC Vault must preserve the Portable Post-Quantum Boundary.
 
-A non-PQC system may store, copy, transmit, archive, or route a `.pqcv` artifact without understanding its contents.
-
-PQC operations should occur at producer, verifier, gateway, archive, build, recovery, or operator-workstation boundaries.
+PQC Vault must remain limited to wrapping and unwrapping ASP-governed material under post-quantum cryptographic protection.
 
 ## Current Status
 
