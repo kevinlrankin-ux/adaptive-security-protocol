@@ -34,6 +34,24 @@ Examples of wrapped material include:
 - archived evidence objects
 - system state exports
 
+## Default Profile Status
+
+PQC Vault may be used as the default wrapping profile for ASP Envelope movement.
+
+This means only that PQC Vault is the preferred wrapper when post-quantum wrapping is available and in scope.
+
+It does **not** mean:
+
+- ASP Envelope is replaced
+- non-PQC ASP Envelope movement is invalidated
+- ASP meaning changes
+- ASP legitimacy changes
+- ASP authority changes
+- ASP posture changes
+- ASP handling changes
+
+Non-PQC ASP Envelope movement remains supported as a compatibility path when PQC wrapping is unavailable, unnecessary, or out of scope.
+
 ## Scope
 
 PQC Vault is limited to wrapping and unwrapping ASP-governed material under post-quantum cryptographic protection.
@@ -111,3 +129,7 @@ PQC Vault MUST preserve the Portable Post-Quantum Boundary.
 PQC Vault MUST NOT define, replace, or compete with ASP behavior.
 
 PQC Vault MUST remain limited to wrapping and unwrapping ASP-governed material under post-quantum cryptographic protection.
+
+## Canonical Close
+
+PQC Vault strengthens how ASP-governed material is wrapped for movement. It does not change what ASP means, what ASP governs, or what authority ASP carries.
